@@ -1,11 +1,5 @@
 #include <SoftwareSerial.h>
 SoftwareSerial BT_Serial(2, 3); // RX, TX
-
-#include <IRremote.h>
-const int RECV_PIN = A5;
-IRrecv irrecv(RECV_PIN);
-decode_results results;
-
 #define enA 10//Enable1 L298 Pin enA 
 #define in1 9 //Motor1  L298 Pin in1 
 #define in2 8 //Motor1  L298 Pin in1 
@@ -25,10 +19,8 @@ int distance_L, distance_F = 30, distance_R;
 long distance;
 int set = 20;
 
-int bt_ir_data; // variable to receive data from the serial port and IRremote
 int Speed = 130;  
 int mode=0;
-int IR_data;
 
 void setup(){ // put your setup code here, to run once
 
