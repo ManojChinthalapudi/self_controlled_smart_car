@@ -63,15 +63,6 @@ bt_ir_data = BT_Serial.read();
 Serial.println(bt_ir_data);     
 if(bt_ir_data > 20){Speed = bt_ir_data;}      
 }
-
-if (irrecv.decode(&results)) {
-Serial.println(results.value,HEX);
-bt_ir_data = IRremote_data();
-Serial.println(bt_ir_data); 
-irrecv.resume(); // Receive the next value
-delay(100);
-}
-
      if(bt_ir_data == 8){mode=0; Stop();}    //Manual Android Application and IR Remote Control Command   
 else if(bt_ir_data == 9){mode=1; Speed=130;} //Auto Line Follower Command
 else if(bt_ir_data ==10){mode=2; Speed=255;} //Auto Obstacle Avoiding Command
@@ -119,18 +110,6 @@ if(mode==2){
 delay(10);
 }
 
-long IRremote_data(){
-     if(results.value==0xFF02FD){IR_data=1;}  
-else if(results.value==0xFF9867){IR_data=2;} 
-else if(results.value==0xFFE01F){IR_data=3;} 
-else if(results.value==0xFF906F){IR_data=4;} 
-else if(results.value==0xFF629D || results.value==0xFFA857){IR_data=5;} 
-else if(results.value==0xFF30CF){IR_data=8;} 
-else if(results.value==0xFF18E7){IR_data=9;} 
-else if(results.value==0xFF7A85){IR_data=10;} 
-return IR_data;
-}
-
 void servoPulse (int pin, int angle){
 int pwm = (angle*11) + 500;      // Convert angle to microseconds
  digitalWrite(pin, HIGH);
@@ -138,7 +117,6 @@ int pwm = (angle*11) + 500;      // Convert angle to microseconds
  digitalWrite(pin, LOW);
  delay(50);                   // Refresh cycle of servo
 }
-
 
 //**********************Ultrasonic_read****************************
 long Ultrasonic_read(){
